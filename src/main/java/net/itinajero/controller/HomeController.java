@@ -81,11 +81,11 @@ public class HomeController {
 			v2.setImagen("empresa2.png");
 			
 			Vacante v3 = new Vacante();
-			v3.setId(2);
-			v3.setNombre("Ingeniero de Sistemas");
-			v3.setDescripcion("Se solicita ingeniero para crear aplicación web");
-			v3.setFecha(sdf.parse("09-03-2013"));
-			v3.setSalario(10000.00);
+			v3.setId(3);
+			v3.setNombre("Ingeniero Ambiental");
+			v3.setDescripcion("Se solicita ingeniero para validar temas ambientales");
+			v3.setFecha(sdf.parse("12-08-2015"));
+			v3.setSalario(5000.00);
 			v3.setDestacado(0);
 			
 			lista.add(v1);
