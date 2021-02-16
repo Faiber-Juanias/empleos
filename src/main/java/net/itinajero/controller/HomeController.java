@@ -1,6 +1,5 @@
 package net.itinajero.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,8 +20,8 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String mostrarHome(Model model) {
-		model.addAttribute("mensaje", "Bienvenidos a Empleos App");
-		model.addAttribute("fecha", new Date());
+		List<Vacante> lista = serviceVacante.buscarTodas();
+		model.addAttribute("vacantes", lista);
 		return "home";
 	}
 	
