@@ -7,5 +7,6 @@ import net.itinajero.model.Vacante;
 public interface IVacantesService {
 
 	List<Vacante> buscarTodas();
+	Vacante buscarPorId(Integer id);
 	
 }
