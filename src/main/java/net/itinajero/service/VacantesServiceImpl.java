@@ -27,6 +27,7 @@ public class VacantesServiceImpl implements IVacantesService {
 			v1.setSalario(9900.0);
 			v1.setDestacado(1);
 			v1.setImagen("empresa1.png");
+			v1.setEstatus("Creada");
 			
 			Vacante v2 = new Vacante();
 			v2.setId(2);
@@ -36,6 +37,7 @@ public class VacantesServiceImpl implements IVacantesService {
 			v2.setSalario(10000.00);
 			v2.setDestacado(0);
 			v2.setImagen("empresa2.png");
+			v2.setEstatus("Aprobada");
 			
 			Vacante v3 = new Vacante();
 			v3.setId(3);
@@ -44,6 +46,7 @@ public class VacantesServiceImpl implements IVacantesService {
 			v3.setFecha(sdf.parse("12-08-2015"));
 			v3.setSalario(5000.00);
 			v3.setDestacado(0);
+			v3.setEstatus("Eliminada");
 			
 			lista.add(v1);
 			lista.add(v2);
@@ -66,6 +69,11 @@ public class VacantesServiceImpl implements IVacantesService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void guardar(Vacante vacante) {
+		lista.add(vacante);
 	}
 
 }
