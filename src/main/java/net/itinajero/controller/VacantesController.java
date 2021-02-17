@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.itinajero.model.Vacante;
+import net.itinajero.service.ICategoriasService;
 import net.itinajero.service.IVacantesService;
 
 @Controller
@@ -28,6 +29,8 @@ public class VacantesController {
 	
 	@Autowired
 	private IVacantesService serviceVacante;
+	@Autowired
+	private ICategoriasService serviceCategoria;
 
 	@GetMapping("/view/{id}")
 	public String verDetalle(@PathVariable("id") int idVacante, Model model) {
@@ -44,7 +47,8 @@ public class VacantesController {
 	}
 	
 	@GetMapping("/create")
-	public String crear(Vacante vacante) {
+	public String crear(Vacante vacante, Model model) {
+		model.addAttribute("categorias", serviceCategoria.buscarTodas());
 		return "vacantes/formVacante";
 	}
 	
@@ -73,6 +77,7 @@ public class VacantesController {
 			}
 			return "vacantes/formVacante";
 		}
+		System.out.println(vacante);
 		serviceVacante.guardar(vacante);
 		attributes.addFlashAttribute("msg", "Registro guardado");
 		return "redirect:/vacantes/index";
