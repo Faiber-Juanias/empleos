@@ -88,8 +88,8 @@ public class VacantesController {
 			return "vacantes/formVacante";
 		}
 		if (!multiPart.isEmpty()) {
-			// String ruta = "/empleos/img-vacantes/"; // Linux/MAC
-			// String ruta = "F:/java-projects/img-empleos/"; // Windows
+			//String ruta = "/empleos/img-vacantes/"; // Linux/MAC
+			//String ruta = "F:/java-projects/spring-tools/img-empleos/"; // Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null) { // La imagen si se subio
 				// Procesamos la variable nombreImagen
