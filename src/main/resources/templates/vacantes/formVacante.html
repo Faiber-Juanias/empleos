@@ -109,7 +109,7 @@
                 </div> 
                 <div class="col-md-3">
                   <label for="imagen">Imagen/Logo</label>
-                  <img class="rounded mx-auto d-block" src="images/construccion-logo.png" alt="Generic placeholder image" width="200" height="200">            
+                  <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${vacante.imagen})}" alt="Generic placeholder image" width="200" height="200">            
                 </div>
               </div> 
               <button type="submit" class="btn btn-primary">Guardar</button>  
