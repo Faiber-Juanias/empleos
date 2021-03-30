@@ -21,7 +21,7 @@ public class Vacante {
 	private String nombre;
 	private String descripcion;
 	private Date fecha;
-	private double salario;
+	private Double salario;
 	private Integer destacado;
 	private String imagen = "no-image.png";
 	private String estatus;
@@ -69,10 +69,10 @@ public class Vacante {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public double getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
-	public void setSalario(double salario) {
+	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 	public Integer getDestacado() {
