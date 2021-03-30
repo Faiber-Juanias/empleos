@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import net.itinajero.iservice.ICategoriasService;
 import net.itinajero.model.Categoria;
 
 @Service
@@ -60,13 +61,19 @@ public class CategoriasServiceImpl implements ICategoriasService {
 	}
 
 	@Override
-	public Categoria buscarPorId(int idCategoria) {
+	public Categoria buscarPorId(Integer idCategoria) {
 		for (Categoria cat : listaCategorias) {
 			if (cat.getId() == idCategoria) {
 				return cat;
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void eliminar(Integer idCategoria) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.itinajero.iservice.ICategoriasService;
 import net.itinajero.model.Categoria;
-import net.itinajero.service.ICategoriasService;
 
 @Controller
 @RequestMapping(value="/categorias")

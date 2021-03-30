@@ -1,4 +1,4 @@
-package net.itinajero.service;
+package net.itinajero.iservice;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ public interface ICategoriasService {
 
 	void guardar(Categoria categoria);
 	List<Categoria> buscarTodas();
-	Categoria buscarPorId(int idCategoria);
+	Categoria buscarPorId(Integer idCategoria);
+	void eliminar(Integer idCategoria);
 	
 }

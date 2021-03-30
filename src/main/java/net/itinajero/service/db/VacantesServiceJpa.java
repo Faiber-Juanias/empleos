@@ -5,11 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import net.itinajero.iservice.IVacantesService;
 import net.itinajero.model.Vacante;
 import net.itinajero.repository.VacantesRepository;
-import net.itinajero.service.IVacantesService;
 
 @Service
 @Primary
@@ -45,6 +46,11 @@ public class VacantesServiceJpa implements IVacantesService {
 	@Override
 	public void eliminar(Integer id) {
 		vacantesRepo.deleteById(id);
+	}
+
+	@Override
+	public List<Vacante> buscarByExample(Example<Vacante> example) {
+		return vacantesRepo.findAll(example);
 	}
 
 }

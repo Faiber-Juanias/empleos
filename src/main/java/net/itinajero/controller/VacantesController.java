@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import net.itinajero.iservice.ICategoriasService;
+import net.itinajero.iservice.IVacantesService;
 import net.itinajero.model.Vacante;
 import net.itinajero.repository.VacantesRepository;
-import net.itinajero.service.ICategoriasService;
-import net.itinajero.service.IVacantesService;
 import net.itinajero.util.Utileria;
 
 @Controller
@@ -130,6 +130,7 @@ public class VacantesController {
 	@ModelAttribute
 	public void setGenericos(Model model) {
 		model.addAttribute("categorias", serviceCategoria.buscarTodas());
+		model.addAttribute("vacan", new Vacante());
 	}
 
 }
