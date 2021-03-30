@@ -29,6 +29,7 @@
           <form class="form-inline" th:object="${search}" th:action="@{/search}" method="get">
             <input type="text" class="form-control mb-3" th:field="*{descripcion}" placeholder="Escriba una búsqueda">&nbsp;
             <select class="custom-select custom-select mb-3" th:field="*{categoria.id}">
+              <option value="">Seleccionar...</option>
               <option 
               		th:each="categoria : ${categorias}" 
               		th:value="${categoria.id}"
