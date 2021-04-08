@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.itinajero.iservice.ICategoriasService;
@@ -41,6 +43,11 @@ public class CategoriasServiceJpa implements ICategoriasService {
 	public void eliminar(Integer idCategoria) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Page<Categoria> buscarTodas(Pageable page) {
+		return categoriasRepo.findAll(page);
 	}
 
 }
