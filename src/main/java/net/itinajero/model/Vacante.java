@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "vacantes")
@@ -24,7 +25,6 @@ public class Vacante {
 	private Integer destacado;
 	private String imagen = "no-image.png";
 	private String estatus;
-	private String detalles;
 	//@Transient // Ignora el mapeo para este atributo
 	
 	@OneToOne
@@ -43,6 +43,7 @@ public class Vacante {
 	public void setDetalles(String detalles) {
 		this.detalles = detalles;
 	}
+	private String detalles;
 	
 	public Integer getId() {
 		return id;

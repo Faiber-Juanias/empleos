@@ -72,6 +72,26 @@ public class VacantesController {
 		return "vacantes/formVacante";
 	}
 
+	/*
+	 * @PostMapping("/save") public String guardar(@RequestParam("nombre") String
+	 * nombre, @RequestParam("descripcion") String descripcion,
+	 * 
+	 * @RequestParam("categoria") String categoria,@RequestParam("estatus") String
+	 * estatus,
+	 * 
+	 * @RequestParam("fecha") String fecha, @RequestParam("destacado") int
+	 * destacado,
+	 * 
+	 * @RequestParam("salario") double salario, @RequestParam("detalles") String
+	 * detalles) { System.out.println("Nombre: " + nombre);
+	 * System.out.println("Descripcion: " + descripcion);
+	 * System.out.println("Categoria: " + categoria); System.out.println("Estatus: "
+	 * + estatus); System.out.println("Fecha: " + fecha);
+	 * System.out.println("Destacado: " + destacado); System.out.println("Salario: "
+	 * + salario); System.out.println("Detalles: " + detalles); return
+	 * "vacantes/listVacantes"; }
+	 */
+
 	@PostMapping("/save")
 	public String guardar(Vacante vacante, BindingResult result, RedirectAttributes attributes,
 			@RequestParam("archivoImagen") MultipartFile multiPart) {
@@ -82,15 +102,18 @@ public class VacantesController {
 			return "vacantes/formVacante";
 		}
 		if (!multiPart.isEmpty()) {
+			//String ruta = "/empleos/img-vacantes/"; // Linux/MAC
+			//String ruta = "F:/java-projects/spring-tools/img-empleos/"; // Windows
 			String nombreImagen = Utileria.guardarArchivo(multiPart, ruta);
-			if (nombreImagen != null) {
+			if (nombreImagen != null) { // La imagen si se subio
+				// Procesamos la variable nombreImagen
 				vacante.setImagen(nombreImagen);
 			}
 		}
 		System.out.println(vacante);
 		serviceVacante.guardar(vacante);
 		attributes.addFlashAttribute("msg", "Registro guardado");
-		return "redirect:/vacantes/indexPaginate";
+		return "redirect:/vacantes/index";
 	}
 
 	@InitBinder

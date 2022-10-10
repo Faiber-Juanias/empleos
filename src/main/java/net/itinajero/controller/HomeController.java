@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
@@ -45,20 +43,14 @@ public class HomeController {
 	}
 	
 	@GetMapping("/index")
-	public String mostrarIndex(Authentication auth, HttpSession session) {
+	public String mostrarHome(Authentication auth) {
 		String username = auth.getName();
 		System.out.println("Nombre usuario: " + username);
 		// Obtenemos los roles asociados al usuario autenticado
 		for (GrantedAuthority rol : auth.getAuthorities()) {
 			System.out.println("ROL "+ rol.getAuthority());
 		}
-		// Agregamos un objeto a la sesión
-		if (session.getAttribute("usuario") == null) {
-			Usuario usuario = serviceUsuario.buscarPorUsername(username);
-			usuario.setPassword(null);
-			System.out.println("Usuario: " + usuario);
-			session.setAttribute("usuario", usuario);			
-		}
+		
 		return "redirect:/";
 	}
 	
@@ -69,6 +61,37 @@ public class HomeController {
 		model.addAttribute("vacantes", serviceVacante.buscarDestacadas());
 		model.addAttribute("categorias", serviceCategoria.buscarTodas());
 		model.addAttribute("search", vacante);
+	}
+	
+	@GetMapping("/listado")
+	public String mostrarListado(Model model) {
+		List<String> lista = new LinkedList<>();
+		lista.add("Ingeniero de Sistemas");
+		lista.add("Auxiliar de contabilidad");
+		lista.add("Vendedor");
+		lista.add("Arquitecto");
+
+		model.addAttribute("empleos", lista);
+		return "listado";
+	}
+	
+	@GetMapping("/detalle")
+	public String mostrarDetalle(Model model) {
+		Vacante vacante = new Vacante();
+		vacante.setNombre("Ingeniero de Comunicaciones");
+		vacante.setDescripcion("Se solicita ingeniero para dar soporte a Intranet");
+		vacante.setFecha(new Date());
+		vacante.setSalario(9700.0);
+		
+		model.addAttribute("vacante", vacante);
+		return "detalle";
+	}
+	
+	@GetMapping("/tabla")
+	public String mostrarTabla(Model model) {
+		List<Vacante> lista = serviceVacante.buscarTodas();
+		model.addAttribute("vacantes", lista);
+		return "tabla"; 
 	}
 	
 	@GetMapping("/signup")
