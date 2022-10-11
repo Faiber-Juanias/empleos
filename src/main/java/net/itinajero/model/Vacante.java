@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +25,8 @@ public class Vacante {
 	private String imagen = "no-image.png";
 	private String estatus;
 	private String detalles;
-	//@Transient // Ignora el mapeo para este atributo
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idCategoria")
 	private Categoria categoria;
 	
