@@ -42,7 +42,7 @@ public class VacantesServiceJpa implements IVacantesService {
 
 	@Override
 	public List<Vacante> buscarDestacadas() {
-		return vacantesRepo.findByDestacadoAndEstatusOrderByIdDesc(1, "Aprobada");
+		return vacantesRepo.findByDestacado(1);
 	}
 
 	@Override
