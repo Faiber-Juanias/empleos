@@ -28,7 +28,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.itinajero.iservice.ICategoriasService;
 import net.itinajero.iservice.IVacantesService;
 import net.itinajero.model.Vacante;
-import net.itinajero.repository.VacantesRepository;
 import net.itinajero.util.Utileria;
 
 @Controller
@@ -57,7 +56,7 @@ public class VacantesController {
 		serviceVacante.eliminar(idVacante);
 		
 		attributes.addFlashAttribute("msg", "La vacante fué eliminada");
-		return "redirect:/vacantes/index";
+		return "redirect:/vacantes/indexPaginate";
 	}
 	
 	@GetMapping("/edit/{id}")
