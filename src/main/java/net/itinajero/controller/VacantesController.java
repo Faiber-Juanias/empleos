@@ -80,7 +80,6 @@ public class VacantesController {
 				vacante.setImagen(nombreImagen);
 			}
 		}
-		System.out.println(vacante);
 		serviceVacante.guardar(vacante);
 		attributes.addFlashAttribute("msg", "Registro guardado");
 		return "redirect:/vacantes/indexPaginate";

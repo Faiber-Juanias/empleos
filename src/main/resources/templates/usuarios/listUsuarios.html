@@ -28,7 +28,7 @@
           <h4 class="card-header"><strong>Listado de Usuarios</strong></h4>              
           <div class="card-body"> 
           	<div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>  
-          	<a class="btn btn-primary" th:href="@{/usuarios/crear}" role="button">
+          	<a class="btn btn-primary" th:href="@{/usuarios/create}" role="button">
 						<i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>     
             <hr>
             <table class="table table-hover">
@@ -46,7 +46,10 @@
                   <td th:text="${usuario.nombre}"></td>
                   <td th:text="${usuario.username}"></td>                  
                   <td th:text="${usuario.email}"></td>
-                  <td th:text="${usuario.estatus}"></td>
+                  <td>
+                  	<span th:if="${usuario.estatus == 1}">Activo</span>
+	            	<span th:unless="${usuario.estatus == 1}">Bloqueado</span>
+                  </td>
                   <td>
                     <a th:href="@{/usuarios/delete/{id} (id=${usuario.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                     <a href="#" onclick="return confirm('¿Quiere bloquear el acceso al usuario?')" class="btn btn-success btn-sm" role="button" title="Bloquear el acceso al sistema para este usuario."><i class="fas fa-lock" aria-hidden="true"></i></a>	

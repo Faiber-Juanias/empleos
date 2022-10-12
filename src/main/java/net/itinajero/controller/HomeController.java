@@ -32,8 +32,10 @@ public class HomeController {
 	
 	@Autowired
 	private IVacantesService serviceVacante;
+	
 	@Autowired
 	private IUsuariosService serviceUsuario;
+	
 	@Autowired
 	private ICategoriasService serviceCategoria;
 
@@ -67,26 +69,6 @@ public class HomeController {
 		model.addAttribute("vacantes", serviceVacante.buscarDestacadas());
 		model.addAttribute("categorias", serviceCategoria.buscarTodas());
 		model.addAttribute("search", vacante);
-	}
-	
-	@GetMapping("/signup")
-	public String registrarse(Usuario usuario) {
-		return "usuarios/formRegistro";
-	}
-	
-	@PostMapping("/signup")
-	public String guardarRegistro(Usuario usuario, RedirectAttributes attributes) {
-		System.out.println("Usuario: " + usuario);
-		Perfil perfil = new Perfil();
-		perfil.setId(3);
-		
-		usuario.setEstatus(1);
-		usuario.setFechaRegistro(new Date());
-		usuario.agregar(perfil);
-		
-		serviceUsuario.guardar(usuario);
-		attributes.addFlashAttribute("msg", "Usuario creado");
-		return "redirect:/usuarios/index";
 	}
 	
 	@GetMapping("/search")
