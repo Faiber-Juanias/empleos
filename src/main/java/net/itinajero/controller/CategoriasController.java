@@ -8,9 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.itinajero.iservice.ICategoriasService;
@@ -26,8 +27,7 @@ public class CategoriasController {
 
 	// @GetMapping("/index")
 	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public String mostrarIndex(Model model) {
-		model.addAttribute("categorias", serviceCategoria.buscarTodas());
+	public String mostrarIndex() {
 		return "categorias/listCategorias";
 	}
 	
@@ -53,9 +53,27 @@ public class CategoriasController {
 			return "categorias/formCategoria";
 		}
 		serviceCategoria.guardar(categoria);
-		System.out.println("Categoria: " + categoria);
 		attributes.addFlashAttribute("msg", "Registro guardado");
-		return "redirect:/categorias/index";
+		return "redirect:/categorias/indexPaginate";
+	}
+	
+	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	public String editar(@PathVariable("id") int idCategoria, Model model) {
+		model.addAttribute("categoria", serviceCategoria.buscarPorId(idCategoria));
+		return "categorias/formCategoria";
+	}
+	
+	@RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
+	public String eliminar(@PathVariable("id") int idCategoria, RedirectAttributes attributes) {
+		serviceCategoria.eliminar(idCategoria);
+		attributes.addFlashAttribute("msg", "Registro eliminado");
+		return "redirect:/categorias/indexPaginate";
+	}
+	
+	
+	@ModelAttribute
+	public void setGenericos(Model model) {
+		model.addAttribute("categorias", serviceCategoria.buscarTodas());
 	}
 	
 }
