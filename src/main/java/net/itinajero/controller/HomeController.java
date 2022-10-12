@@ -1,7 +1,6 @@
 package net.itinajero.controller;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.itinajero.iservice.ICategoriasService;
 import net.itinajero.iservice.IUsuariosService;
 import net.itinajero.iservice.IVacantesService;
-import net.itinajero.model.Categoria;
 import net.itinajero.model.Perfil;
 import net.itinajero.model.Usuario;
 import net.itinajero.model.Vacante;

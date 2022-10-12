@@ -2,7 +2,6 @@ package net.itinajero.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,17 +23,10 @@ public class CategoriasController {
 	@Autowired
 	@Qualifier("categoriasServiceJpa")
 	public ICategoriasService serviceCategoria;
-
-	// @GetMapping("/index")
-	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public String mostrarIndex() {
-		return "categorias/listCategorias";
-	}
 	
 	@RequestMapping(value = "/indexPaginate", method = RequestMethod.GET)
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Categoria> lista = serviceCategoria.buscarTodas(page);
-		model.addAttribute("categorias", lista);
+		model.addAttribute("categorias", serviceCategoria.buscarTodas(page));
 		return "categorias/listCategorias";
 	}
 	
@@ -73,7 +65,7 @@ public class CategoriasController {
 	
 	@ModelAttribute
 	public void setGenericos(Model model) {
-		model.addAttribute("categorias", serviceCategoria.buscarTodas());
+		
 	}
 	
 }

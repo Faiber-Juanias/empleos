@@ -1,6 +1,7 @@
 package net.itinajero.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ public class UsuariosController {
 	@Autowired
 	private IUsuariosService serviceUsuario;
 	
-	@GetMapping("/index")
-	public String mostrarIndex(Model model) {
-		model.addAttribute("usuarios", serviceUsuario.buscarTodos());
+	@GetMapping("/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		model.addAttribute("usuarios", serviceUsuario.buscarTodos(page));
 		return "usuarios/listUsuarios";
 	}
 	
@@ -27,7 +28,7 @@ public class UsuariosController {
 	public String eliminar(@PathVariable("id") int idUsuario, RedirectAttributes attributes) {
 		serviceUsuario.eliminar(idUsuario);
 		attributes.addFlashAttribute("msg", "Usuario eliminado");
-		return "redirect:/usuarios/index";
+		return "redirect:/usuarios/indexPaginate";
 	}
 	
 }

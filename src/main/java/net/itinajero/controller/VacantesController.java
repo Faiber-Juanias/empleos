@@ -2,13 +2,11 @@ package net.itinajero.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,24 +43,20 @@ public class VacantesController {
 
 	@GetMapping("/view/{id}")
 	public String verDetalle(@PathVariable("id") int idVacante, Model model) {
-		Vacante vacante = serviceVacante.buscarPorId(idVacante);
-		model.addAttribute("vacante", vacante);
+		model.addAttribute("vacante", serviceVacante.buscarPorId(idVacante));
 		return "detalle";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idVacante, RedirectAttributes attributes) {
-		System.out.println("Vacante eliminada con ID: " + idVacante);
 		serviceVacante.eliminar(idVacante);
-		
 		attributes.addFlashAttribute("msg", "La vacante fué eliminada");
 		return "redirect:/vacantes/indexPaginate";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String editar(@PathVariable("id") int idVacante, Model model) {
-		Vacante vacante = serviceVacante.buscarPorId(idVacante);
-		model.addAttribute("vacante", vacante);
+		model.addAttribute("vacante", serviceVacante.buscarPorId(idVacante));
 		return "vacantes/formVacante";
 	}
 
@@ -97,25 +91,16 @@ public class VacantesController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
-
-	@GetMapping("/index")
-	public String mostrarIndex(Model model) {
-		List<Vacante> vacantes = serviceVacante.buscarTodas();
-		model.addAttribute("vacantes", vacantes);
-		return "vacantes/listVacantes";
-	}
 	
 	@GetMapping("/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-		Page<Vacante> lista = serviceVacante.buscarTodas(page);
-		model.addAttribute("vacantes", lista);
+		model.addAttribute("vacantes", serviceVacante.buscarTodas(page));
 		return "vacantes/listVacantes";
 	}
 	
 	@ModelAttribute
 	public void setGenericos(Model model) {
 		model.addAttribute("categorias", serviceCategoria.buscarTodas());
-		model.addAttribute("vacan", new Vacante());
 	}
 
 }

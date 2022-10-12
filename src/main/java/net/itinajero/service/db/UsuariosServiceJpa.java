@@ -1,8 +1,8 @@
 package net.itinajero.service.db;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import net.itinajero.iservice.IUsuariosService;
@@ -26,14 +26,13 @@ public class UsuariosServiceJpa implements IUsuariosService {
 	}
 
 	@Override
-	public List<Usuario> buscarTodos() {
-		List<Usuario> listUsuarios = repoUsuario.findAll();
-		return listUsuarios;
+	public Usuario buscarPorUsername(String username) {
+		return repoUsuario.findByUsername(username);
 	}
 
 	@Override
-	public Usuario buscarPorUsername(String username) {
-		return repoUsuario.findByUsername(username);
+	public Page<Usuario> buscarTodos(Pageable page) {
+		return repoUsuario.findAll(page);
 	}
 
 }

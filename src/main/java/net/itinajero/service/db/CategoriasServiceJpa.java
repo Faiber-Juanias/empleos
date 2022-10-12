@@ -24,11 +24,6 @@ public class CategoriasServiceJpa implements ICategoriasService {
 	public void guardar(Categoria categoria) {
 		categoriasRepo.save(categoria);
 	}
- 
-	@Override
-	public List<Categoria> buscarTodas() {
-		return categoriasRepo.findAll();
-	}
 
 	@Override
 	public Categoria buscarPorId(Integer idCategoria) {
@@ -47,6 +42,11 @@ public class CategoriasServiceJpa implements ICategoriasService {
 	@Override
 	public Page<Categoria> buscarTodas(Pageable page) {
 		return categoriasRepo.findAll(page);
+	}
+
+	@Override
+	public List<Categoria> buscarTodas() {
+		return categoriasRepo.findAll();
 	}
 
 }
