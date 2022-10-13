@@ -1,6 +1,5 @@
 package net.itinajero.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,13 +16,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.itinajero.iservice.ICategoriasService;
 import net.itinajero.iservice.IUsuariosService;
 import net.itinajero.iservice.IVacantesService;
-import net.itinajero.model.Perfil;
 import net.itinajero.model.Usuario;
 import net.itinajero.model.Vacante;
 
@@ -73,13 +69,10 @@ public class HomeController {
 	
 	@GetMapping("/search")
 	public String buscar(@ModelAttribute("search") Vacante vacante, Model model) {
-		System.out.println("Buscando por: " + vacante);
 		
-		// Cambiamos el operador por defecto = por la clausula LIKE para el campo 'descripcion'
 		ExampleMatcher matcher = ExampleMatcher.matching()
 				.withMatcher("descripcion", ExampleMatcher.GenericPropertyMatchers.contains());
 		
-		// Realiza un Matching y filtra en la base de datos por los atributos que contengan valores
 		Example<Vacante> example = Example.of(vacante, matcher);
 		List<Vacante> lista = serviceVacante.buscarByExample(example);
 		
