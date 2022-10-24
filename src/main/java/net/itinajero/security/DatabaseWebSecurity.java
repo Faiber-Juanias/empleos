@@ -19,9 +19,9 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-			.usersByUsernameQuery("select username, password, estatus from Usuarios where username=?")
-			.authoritiesByUsernameQuery("select u.username, p.perfil from UsuarioPerfil up " +
-				"inner join Usuarios u on u.id = up.idUsuario " +
+			.usersByUsernameQuery("select username, password, estatus from usuarios where username=?")
+			.authoritiesByUsernameQuery("select u.username, p.perfil from usuarioperfil up " +
+				"inner join usuarios u on u.id = up.idUsuario " +
 				"inner join Perfiles p on p.id = up.idPerfil " +
 				"where u.username = ?");
 	}
@@ -29,17 +29,12 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				// Los recursos estáticos no requieren autenticación
-				.antMatchers("/bootstrap/**", "/images/**", "/tinymce/**", "/logos/**").permitAll()
-				// Las vistas públicas no requieren autenticación
+				.antMatchers("/bootstrap/**", "/tinymce/**", "/logos/**").permitAll()
 				.antMatchers("/", "/signup", "/search", "/vacantes/view/**").permitAll()
-				// Asignar permisos a URLs por ROLES
-				.antMatchers("/vacantes/**").permitAll()
-				.antMatchers("/categorias/**").permitAll()
-				.antMatchers("/usuarios/**").permitAll()
-				// Todas las demás URLs de la Aplicación requieren autenticación
+				.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+				.antMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+				.antMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
 				.anyRequest().authenticated()
-				// El formulario de Login no requiere autenticacion
 				.and().formLogin().permitAll();
 	}
 }
