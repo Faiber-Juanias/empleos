@@ -24,6 +24,7 @@
 	    <a class="btn btn-primary" th:href="@{/usuarios/create}">Registrarse</a>&nbsp;
     </div>
     <div sec:authorize="isAuthenticated()">
+    	<span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>
     	<a class="btn btn-primary" th:href="@{/logout}">Salir</a>
     </div>
   </div>
