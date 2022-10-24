@@ -18,9 +18,13 @@
       <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
         <a class="nav-link" th:href="@{/usuarios/indexPaginate}">Usuarios</a>
       </li>          
-    </ul>  
-    <a class="btn btn-primary" th:href="@{/index}">Ingresar</a>&nbsp;
-    <a class="btn btn-primary" th:href="@{/usuarios/create}">Registrarse</a>&nbsp;
-    <a class="btn btn-primary" th:href="@{/logout}">Salir</a>
+    </ul>
+    <div sec:authorize="isAnonymous()">
+	    <a class="btn btn-primary" th:href="@{/index}">Ingresar</a>&nbsp;
+	    <a class="btn btn-primary" th:href="@{/usuarios/create}">Registrarse</a>&nbsp;
+    </div>
+    <div sec:authorize="isAuthenticated()">
+    	<a class="btn btn-primary" th:href="@{/logout}">Salir</a>
+    </div>
   </div>
 </nav>

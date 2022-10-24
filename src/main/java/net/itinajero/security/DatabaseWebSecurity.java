@@ -33,6 +33,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/signup", "/search", "/vacantes/view/**").permitAll()
 				.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+				.antMatchers("/usuarios/create").permitAll()
 				.antMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
 				.anyRequest().authenticated()
 				.and().formLogin().permitAll();
