@@ -40,7 +40,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				.antMatchers("/usuarios/save").permitAll()
 				.antMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
 				.anyRequest().authenticated()
-				.and().formLogin().permitAll();
+				.and().formLogin().loginPage("/login").permitAll();
 	}
 	
 	@Bean

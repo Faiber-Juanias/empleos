@@ -81,4 +81,9 @@ public class HomeController {
 		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
 	}
 	
+	@GetMapping("/login" )
+	public String mostrarLogin() {
+		return "formLogin";
+	}
+	
 }
