@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,9 @@ public class UsuariosController {
 
 	@Autowired
 	private IUsuariosService serviceUsuario;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("/indexPaginate")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
@@ -52,10 +56,11 @@ public class UsuariosController {
 			return "usuarios/formRegistro";
 		}
 		Perfil perfil = new Perfil();
-		perfil.setId(3);
+		perfil.setId(1);
 		usuario.agregar(perfil);
 		usuario.setEstatus(1);
 		usuario.setFechaRegistro(new Date());
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		serviceUsuario.guardar(usuario);
 		attributes.addFlashAttribute("msg", "Registro guardado");
 		return "redirect:/usuarios/indexPaginate";
