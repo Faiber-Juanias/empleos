@@ -13,10 +13,12 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.itinajero.iservice.ISolicitudesService;
+import net.itinajero.iservice.IVacantesService;
 
 @Controller
 @RequestMapping("/solicitudes")
@@ -27,6 +29,9 @@ public class SolicitudesController {
 	
 	@Autowired
 	private ISolicitudesService serviceSolicitud;
+	
+	@Autowired
+	private IVacantesService serviceVacante;
 	
 	@GetMapping("/index") 
 	public String mostrarIndex() {
@@ -40,7 +45,8 @@ public class SolicitudesController {
 	}
 	
 	@GetMapping("/create/{idVacante}")
-	public String crear() {
+	public String crear(@PathVariable("idVacante") int idVacante, Model model) {
+		model.addAttribute("vacante", serviceVacante.buscarPorId(idVacante));
 		return "solicitudes/formSolicitud";
 	}
 	
