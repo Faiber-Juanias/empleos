@@ -33,7 +33,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/bootstrap/**", "/tinymce/**", "/logos/**").permitAll()
-				.antMatchers("/", "/signup", "/search", "/vacantes/view/**").permitAll()
+				.antMatchers("/", "/signup", "/search", "/vacantes/view/**", "/solicitudes/**").permitAll()
 				.antMatchers("/vacantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
 				.antMatchers("/usuarios/create").permitAll()
