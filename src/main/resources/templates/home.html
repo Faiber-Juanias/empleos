@@ -20,10 +20,10 @@
     <header th:insert="fragments/menu :: menu-principal"></header>
 
     <main role="main">
-
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
+          <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
           <h3>Encuentra el trabajo que andas buscando.</h3>
           Puedes buscar por descripción y categoría.
           <form class="form-inline" th:object="${search}" th:action="@{/search}" method="get">
