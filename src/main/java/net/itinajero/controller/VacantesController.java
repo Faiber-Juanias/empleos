@@ -3,6 +3,8 @@ package net.itinajero.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +44,7 @@ public class VacantesController {
 	private ICategoriasService serviceCategoria;
 
 	@GetMapping("/view/{id}")
-	public String verDetalle(@PathVariable("id") int idVacante, Model model) {
+	public String verDetalle(@PathVariable("id") int idVacante, Model model, HttpSession session) {
 		model.addAttribute("vacante", serviceVacante.buscarPorId(idVacante));
 		return "detalle";
 	}

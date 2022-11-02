@@ -36,12 +36,18 @@
                 <h6 class="card-title"><strong>Salario Ofrecido: </strong><span th:text="${vacante.salario}"></span></h6>
                 <p class="card-text" th:text="${vacante.descripcion}"></p>
                 <hr>
-                <form>                                                 
+                <form th:action="@{/solicitudes/save}" method="post" enctype="multipart/form-data" th:object="${solicitud}">
+                	<div th:if="${#fields.hasErrors('*')}"class='alert alert-danger' role='alert'>
+						Por favor corrija los siguientes errores:
+						<ul>
+							<li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+						</ul>
+					</div>                                             
                   <div class="row">
                     <div class="col-md-6"> 
                       <div class="form-group">
                         <label for="comentarios">Comentarios</label>
-                        <textarea class="form-control" name="comentarios" id="comentarios" rows="2"></textarea>
+                        <textarea class="form-control" th:field="*{comentarios}" name="comentarios" id="comentarios" rows="2"></textarea>
                       </div> 
                     </div> 
                     <div class="col-md-6"> 
@@ -51,8 +57,7 @@
                         <p class="help-block">Archivos [ pdf,doc,docx ]</p>
                       </div>
                     </div>
-                  </div> 
-                  <hr>
+                  </div>
                   <button type="submit" title="Enviar mi Solicitud." class="btn btn-primary">Enviar</button>  
                 </form>
               </div>

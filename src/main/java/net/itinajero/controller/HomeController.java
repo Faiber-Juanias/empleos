@@ -37,7 +37,7 @@ public class HomeController {
 	private ICategoriasService serviceCategoria;
 
 	@GetMapping("/")
-	public String mostrarHome() {
+	public String mostrarHome(HttpSession session) {
 		return "home";
 	}
 	
